@@ -15,6 +15,10 @@ app.get("/", (req, res)=>{
 	res.status(200).send("This is the homepage")
 })
 
+app.get('/config', (req, res)=>{
+	res.status(200).send(process.env.PUBLISHABLE_KEY)
+})
+
 // this is where your business logic goes, you will get an item list from front-end that will
 // contain ids of items your website sells, you will cross check their prices from the database
 // and eventually pass the total amount to be paid.
