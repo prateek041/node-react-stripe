@@ -12,18 +12,15 @@ const Card = () => {
       return;
     }
     // 2: Use the create-payment-intent route in backend to get client secret.
-    const { clientSecret } = await fetch(
-      "http:localhost:9090/create-payment-intent",
-      {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          currency: "INR",
-        }),
-      }
-    ).then((r) => r.json()); // here the client secret is returned, convert it into json.
+    const { clientSecret } = await fetch("/create-payment-intent", {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        currency: "INR",
+      }),
+    }).then((r) => r.json()); // here the client secret is returned, convert it into json.
 
     // 3: Confirm payment.
     const { error: stripeError, paymentIntent } =
@@ -45,7 +42,7 @@ const Card = () => {
       <div>This is a card</div>
       <form onSubmit={handleSubmit}>
         <CardElement />
-        <button>Pay</button>
+        <button type="submit">Pay</button>
       </form>
     </>
   );
